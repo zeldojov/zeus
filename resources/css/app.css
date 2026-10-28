@@ -11,3 +11,54 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --color-page: var(--page); /*	Pozadina stranice */
+    --color-surface: var(--surface); /* Kartice, paneli, navigacija */
+    --color-surface-secondary: var(--surface-secondary); /* Sekundarne površine */
+
+    --color-border-default: var(--border-default); /* Okviri i razdelnici */
+
+    --color-text-primary: var(--text-primary); /* Glavni tekst */
+    --color-text-secondary: var(--text-secondary); /* Sekundarni tekst */
+    --color-text-muted: var(--text-muted); /* Mutirani tekst */
+
+    --color-primary: var(--primary); /* Primarne akcije i linkovi */
+    --color-primary-hover: var(--primary-hover); /* Hover primarnih akcija */
+}
+
+:root {
+    color-scheme: light;
+
+    --page: var(--color-gray-50);
+    --surface: var(--color-white);
+    --surface-secondary: var(--color-gray-100);
+
+    --border-default: var(--color-gray-200);
+
+    --text-primary: var(--color-gray-900);
+    --text-secondary: var(--color-gray-600);
+    --text-muted: var(--color-gray-500);
+
+    --primary: var(--color-blue-600);
+    --primary-hover: var(--color-blue-700);
+}
+
+.dark {
+    color-scheme: dark;
+
+    --page: var(--color-gray-950);
+    --surface: var(--color-gray-900);
+    --surface-secondary: var(--color-gray-800);
+
+    --border-default: var(--color-gray-800);
+
+    --text-primary: var(--color-gray-100);
+    --text-secondary: var(--color-gray-400);
+    --text-muted: var(--color-gray-500);
+
+    --primary: var(--color-blue-400);
+    --primary-hover: var(--color-blue-300);
+}

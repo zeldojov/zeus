@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -10,57 +10,59 @@
     @endif
 </head>
 
-<body class="min-h-screen bg-zinc-950 antialiased" x-data="{ sidebarOpen: false, profileMenuOpen: false }"
+<body class="min-h-screen bg-page antialiased" x-data="{ sidebarOpen: false, profileMenuOpen: false }"
     @keydown.escape.window="sidebarOpen = false; profileMenuOpen = false">
 
+    <form id="logout-form" method="POST" action="{{ route('logout') }}" class="hidden">
+        @csrf
+    </form>
+
     {{-- Navigation bar --}}
-    <nav class="block w-full sticky top-0 z-50 bg-zinc-800">
+    <nav class="block w-full sticky top-0 z-50 bg-surface">
         <div class="mx-auto container max-w-5xl px-4 sm:px-6 lg:px-8">
             <div class="w-full flex flex-row gap-4 items-center justify-between">
 
                 {{-- Logo link --}}
-                <a href="{{ url('/') }}" class="block text-2xl text-blue-600 font-bold py-2">
+                <a href="{{ url('/') }}" class="block text-2xl text-primary font-bold py-2">
                     Laravel
                 </a>
                 {{-- Authenticated user links --}}
                 @auth
                     <div class="flex flex-row gap-4 items-center">
-                        <x-navbar-link :url="route('welcome')" text="Welcome" />
-                        <x-navbar-link :url="route('user.home')" text="Home" />
-                        <x-navbar-link :url="route('user.settings') . '#personal-information'" text="Settings" />
-                        <x-navbar-link logout text="Logout" />
+                        <x-link href="{{ route('welcome') }}">Welcome</x-link>
+                        <x-link href="{{ route('user.home') }}">Home</x-link>
+                        <x-link href="{{ route('user.settings') . '#personal-information' }}">Settings</x-link>
+                        <x-link form="logout-form">Logout</x-link>
                     </div>
                 @endauth
                 {{-- Guest user links --}}
                 @guest
                     <div class="flex flex-row gap-4 items-center">
-                        <x-navbar-link :url="route('login')" text="Login" />
-                        <x-navbar-link :url="route('register')" text="Register" />
+                        <x-link href="{{ route('login') }}">Login</x-link>
+                        <x-link href="{{ route('register') }}">Register</x-link>
                     </div>
                 @endguest
             </div>
         </div>
 
-        {{-- Secondary navigation or additional links can go here --}}
-        <div class="mx-auto container max-w-5xl px-4 sm:px-6 lg:px-8 border-t border-zinc-600 py-2">
-            <div class="w-full flex flex-row gap-4 items-center justify-center">
-                @yield('sidebar-context')
+         {{-- Secondary navigation or additional links can go here --}}
+        @if (View::hasSection('sidebar-context'))
+            <div class="mx-auto container max-w-5xl px-4 sm:px-6 lg:px-8 border-t border-border-default py-2">
+                <div class="w-full flex flex-row gap-4 items-center justify-center">
+                    @yield('sidebar-context')
+                </div>
             </div>
-        </div>
+        @endif
+
     </nav>
 
     <div class="flex flex-col items-stretch min-h-screen">
-        <header class="w-full bg-indigo-600 ">
 
-
-
-        </header>
-
-        <main class="min-w-0 flex-1 bg-zinc-950 p-4">
+        <main class="bg-page min-w-0 flex-1 p-4">
             @yield('content')
         </main>
 
-        <footer class="bg-black min-h-16 w-full">
+        <footer class="bg-surface min-h-16 w-full">
 
         </footer>
     </div>

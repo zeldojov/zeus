@@ -1,10 +1,10 @@
 @extends('layouts.app', ['title' => 'Account Settings'])
 
 @section('sidebar-context')
-    <x-navbar-link secondary url="{{ url('/user/settings') . '#personal-information' }}" fragment="personal-information" text="Lični podaci" />
-    <x-navbar-link secondary url="{{ url('/user/settings') . '#password' }}" fragment="password" text="Lozinka" />
-    <x-navbar-link secondary url="{{ url('/user/settings') . '#two-factor' }}" fragment="two-factor" text="Dvofaktorska zaštita" />
-    <x-navbar-link secondary url="{{ url('/user/settings') . '#sessions' }}" fragment="sessions" text="Sesije" />
+    <x-link secondary fragment="personal-information">Lični podaci</x-link>
+    <x-link secondary fragment="password">Lozinka</x-link>
+    <x-link secondary fragment="two-factor">Dvofaktorska zaštita</x-link>
+    <x-link secondary fragment="sessions" text="Sesije">Sesije</x-link>
 @endsection
 
 @section('content')
